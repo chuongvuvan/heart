@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: rgb(82,81,79);
+  background: radial-gradient(circle, rgba(82,81,79,1) 0%, rgba(36,35,33,1) 32%, rgba(0,0,0,1) 100%);
+  color: #adadad;
+  font-family: Arial;
+  font-size: 16px;
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+#container {
+  position: absolute;
+  opacity: 0.25;
+}
+
+#loader {
+  width: inherit;
+  height: inherit;
+  margin: 0 auto;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#loader-content {
+  background: none;
+}
+
+button {
+  position: absolute;
+  background: none;
+  border: none;
+  outline: none;
+  transition: transform 0.2s ease-in-out;
+  opacity: 1.0;
+}
+
+#btn-freeze {
+  position: absolute;
+  width: 145px;
+  height: auto;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  transform: rotate(3deg);
+  padding: 1.25em 1.0em;
+  opacity: 0.85;
+}
+
+#btn-freeze:hover {
+  animation: rotateMe2 0.35s ease-in-out forwards;
+}
+
+#btn-credits {
+  position: absolute;
+  width: 100px;
+  height: auto;
+  background: none;
+  bottom: 0;
+  right: 0;
+  opacity: 0.75;
+  padding: 0.5em 0.25em;
+  transform: rotate(-20deg);
+  display: none;
+  opacity: 0.7;
+  text-decoration: none;
+}
+
+a:active, a:focus {
+  text-decoration: none;
+  outline: 0;
+  border: none;
+  -moz-outline-style: none;
+}
+
+#btn-credits:hover {
+  animation: rotateMe 0.25s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@-moz-keyframes fadeOut {
+  0%   { opacity: 1; }
+  100%  { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.25; }
+  100% { opacity: 1; }
+}
+
+@-moz-keyframes fadeIn {
+  0%   { opacity: 0.25; }
+  100%  { opacity: 1; }
+}
+
+@keyframes rotateMe {
+  0% { transform: rotate(-20deg);
+  opacity: 0.7;}
+  100% { transform: rotate(0deg);
+  opacity: 1;}
+}
+
+@-moz-keyframes rotateMe {
+  0% { transform: rotate(-20deg);
+  opacity: 0.7;}
+  100% { transform: rotate(0deg); opacity: 1.0; }
+}
+
+@keyframes rotateMe2 {
+  0% { 
+    transform: rotate(3deg) scale(1.0);
+    opacity: 0.7;
+  }
+  100% { 
+    transform: rotate(15deg) scale(1.05);
+    opacity: 1.0;
+  }
+}
+
+@-moz-keyframes rotateMe2 {
+  0% { 
+    transform: rotate(3deg);
+    transform: scale(1.0);
+    opacity: 0.7;
+  }
+  100% { 
+    transform: rotate(15deg);
+    transform: scale(1.1);
+    opacity: 1.0;
+  }
+}
+
+@media ( max-width: 800px ) {
+  
+  #btn-freeze {
+    width: 120px;
+    position: fixed;
+    top: 0;
+    left: inherit;
+    right: 0;
+    padding: 1em;
+    transform: rotate(15deg);
+  }
+  
+  #btn-freeze:hover {
+    animation: none;
+  }
+  
+  #btn-credits {
+    display: none;
+  }
+  
+}
+    </style>
+</head>
+<body>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+<div id="container" role="img" aria-label="Ghost flying around a tree">
+</div>
+
+<div id="loader">
+  <div id="loader-content" class="border-gradient border-gradient-purple">
+    <p>Loading 3D scene... ✨</p>
+  </div>
+</div>
+
+<button id="btn-freeze">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99.799 42.739">
+    <defs>
+      <filter height="1.248" y="-.124" width="1.092" x="-.046" id="a" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="1.807" />
+      </filter>
+    </defs>
+    <g id="freeze-text-blur" transform="translate(-1.18 -1.623)" filter="url(#a)" fill="none" stroke="#b0b0b0">
+      <path d="M25.636 10.552c-1.843 7.337-4.62 16.543-8.126 22.679M8.816 19.624c9.974-.372 30.667-3.216 33.64-14.363M15.053 24.726c5.363 1.364 13.934-2.697 16.442-4.535M31.022 27.845c1.609-1.694 3.847-2.611 5.576-4.158 6.37-5.7 1.953-7.319-1.418-1.701-3.897 6.496 7.813-.468 9.45-2.268M44.63 19.718c-4.05.891-13.429 16.197-2.74 9.072" />
+      <path d="M42.078 26.805c2.818-.666 4.975-1.844 7.37-3.213 10.356-5.917 6.352-12.377-3.118-.756-8.242 10.116 2.227 8.924 8.316 2.835" />
+      <path d="M52.19 25.766c2.445-1.012 4.868-2.107 7.18-3.402 9.618-5.386 3.297-8.388-2.55.189-5.712 8.377 3.361 8.05 8.598 3.685" />
+      <path d="M64.284 23.498c1.292-.693 2.596-1.363 3.875-2.079 1.033-.578 1.86-1.403 2.645-2.268 4.807-5.287-4.933-.681-2.551 1.701 2.696 2.696 11.116-6.284 3.969 1.512-.322.35-5.82 5.654-6.142 5.008-.408-.816 3.932-2.844 4.724-2.646.867.217-.713 2.941 1.04 2.552 1.237-.275 2.219-1.27 3.118-2.08" />
+      <path d="M73.828 23.498c3.162-.749 5.092-1.59 7.654-3.213 9.24-5.851-4.396-5.169-5.102 3.307-.416 4.986 10.12 2.11 12-.189M20.061 11.97c-5.567-2.034-10.471.077-14.552 4.157-2.638 2.639-2.336 5.286 1.7 5.67 1.577.15 6.195-1.06 4.726-.472-4.195 1.677-.003 1.448 2.173.756" />
+      <path d="M79.309 28.128c2.9.636 5.15.384 7.843-.472 5.975-1.902 9.454-9.107 5.575-6.52-3.217 2.144 3.86 1.413 5.197.661M18.41 26.488c-3.197 8.188-9.445 15.54-11.16 5.856" />
+      <g>
+        <path d="M95.263 5.625c-2.024 3.49-7.167 6.601-13.293 5.438M90.832 4.215c-.295 3.694-2.873 8.353-5.304 10.54M82.172 6.43c3.077 3.028 9.31 5.886 12.554 5.707" />
+      </g>
+      <g>
+        <path d="M28.935 28.72c-1.436 3.613-5.137 8.71-8.66 10.472M22.557 29.793c2.541 3.398 4.076 6.935 2.685 9.4M19.267 35.164c5.351.644 10.22-1.22 13.293-4.565" />
+      </g>
+    </g>
+    <g id="freeze-text-top" fill="none" stroke="#b0b0b0">
+      <g stroke-width=".5">
+        <path d="M24.457 8.93c-1.843 7.336-4.62 16.543-8.126 22.678M7.637 18c9.974-.371 30.667-3.215 33.64-14.362M13.874 23.104c5.363 1.363 13.934-2.697 16.442-4.536M29.843 26.222c1.608-1.694 3.847-2.611 5.575-4.158 6.37-5.7 1.954-7.319-1.417-1.7-3.898 6.495 7.813-.468 9.45-2.269M43.45 18.095c-4.049.892-13.428 16.197-2.74 9.072" />
+        <path d="M40.899 25.182c2.818-.665 4.975-1.843 7.37-3.212 10.356-5.918 6.352-12.378-3.118-.756-8.242 10.115 2.227 8.923 8.316 2.834" />
+        <path d="M51.01 24.143c2.446-1.012 4.87-2.107 7.181-3.402 9.618-5.385 3.297-8.388-2.55.19-5.713 8.376 3.361 8.048 8.598 3.684" />
+        <path d="M63.105 21.875c1.292-.693 2.596-1.363 3.874-2.079 1.033-.578 1.86-1.403 2.646-2.268 4.807-5.287-4.933-.681-2.551 1.701 2.696 2.696 11.115-6.284 3.969 1.512-.322.351-5.82 5.655-6.142 5.008-.409-.816 3.932-2.843 4.724-2.645.867.216-.713 2.94 1.04 2.55 1.236-.274 2.218-1.268 3.118-2.078" />
+        <path d="M72.649 21.875c3.162-.749 5.092-1.59 7.654-3.213 9.24-5.851-4.396-5.168-5.103 3.308-.415 4.985 10.12 2.11 12.001-.19M18.882 10.347c-5.568-2.034-10.472.077-14.552 4.158-2.638 2.638-2.336 5.285 1.7 5.67 1.576.15 6.195-1.061 4.725-.473-4.194 1.677-.002 1.448 2.174.756" />
+        <path d="M78.13 26.505c2.9.636 5.15.384 7.843-.472 5.975-1.901 9.454-9.106 5.575-6.52-3.217 2.144 3.86 1.414 5.197.661" />
+      </g>
+      <path d="M17.23 24.865c-3.196 8.189-9.444 15.54-11.159 5.857" stroke-width=".5" />
+      <g stroke-width=".3" stroke="#cb02ea">
+        <path d="M94.084 4.002c-2.024 3.49-7.167 6.601-13.293 5.438M89.653 2.593c-.295 3.693-2.873 8.352-5.304 10.54M80.993 4.808c3.077 3.028 9.31 5.885 12.554 5.706" />
+      </g>
+      <g stroke-width=".3" stroke="#cb02ea">
+        <path d="M27.755 27.096c-1.435 3.614-5.136 8.712-8.66 10.473M21.378 28.17c2.541 3.399 4.076 6.935 2.685 9.4M18.088 33.541c5.351.644 10.22-1.219 13.293-4.565" />
+      </g>
+    </g>
+  </svg>
+</button>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+    }
+  }
+</script>
+
+<!-- Matcap VS -->
+<script type="x-shader/x-vertex" id="matcap-vs">
+
+  varying vec2 vN;
+
+	void main() {
+
+		vec3 e = normalize( vec3( modelViewMatrix * vec4( position, 1.0 ) ) );
+		vec3 n = normalize( normalMatrix * normal );
+
+		vec3 r = reflect( e, n );
+		float m = 2. * sqrt( pow( r.x, 2. ) + pow( r.y, 2. ) + pow( r.z + 1., 2. ) );
+		vN = r.xy / m + .5;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( vec3(position), 1. );
+
+	}
+
+</script>
+
+<!-- Matcap FS -->
+<script type="x-shader/x-fragment" id="matcap-fs">
+
+  uniform sampler2D tMatCap;
+	varying vec2 vN;
+
+	void main() {
+		
+		vec3 base = texture2D( tMatCap, vN ).rgb;
+		gl_FragColor = vec4( base, 1.0 );
+
+	}
+	
+</script>
+
+<!-- Flaky VS  -->
+<script type="x-shader/x-vertex" id="flaky-vs">
+  //	Simplex 4D Noise 
+//	by Ian McEwan, Ashima Arts
+//
+vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
+float permute(float x){return floor(mod(((x*34.0)+1.0)*x, 289.0));}
+vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
+float taylorInvSqrt(float r){return 1.79284291400159 - 0.85373472095314 * r;}
+
+vec4 grad4(float j, vec4 ip){
+  const vec4 ones = vec4(1.0, 1.0, 1.0, -1.0);
+  vec4 p,s;
+
+  p.xyz = floor( fract (vec3(j) * ip.xyz) * 7.0) * ip.z - 1.0;
+  p.w = 1.5 - dot(abs(p.xyz), ones.xyz);
+  s = vec4(lessThan(p, vec4(0.0)));
+  p.xyz = p.xyz + (s.xyz*2.0 - 1.0) * s.www; 
+
+  return p;
+}
+
+float snoise(vec4 v){
+  const vec2  C = vec2( 0.138196601125010504,  // (5 - sqrt(5))/20  G4
+                        0.309016994374947451); // (sqrt(5) - 1)/4   F4
+// First corner
+  vec4 i  = floor(v + dot(v, C.yyyy) );
+  vec4 x0 = v -   i + dot(i, C.xxxx);
+
+// Other corners
+
+// Rank sorting originally contributed by Bill Licea-Kane, AMD (formerly ATI)
+  vec4 i0;
+
+  vec3 isX = step( x0.yzw, x0.xxx );
+  vec3 isYZ = step( x0.zww, x0.yyz );
+//  i0.x = dot( isX, vec3( 1.0 ) );
+  i0.x = isX.x + isX.y + isX.z;
+  i0.yzw = 1.0 - isX;
+
+//  i0.y += dot( isYZ.xy, vec2( 1.0 ) );
+  i0.y += isYZ.x + isYZ.y;
+  i0.zw += 1.0 - isYZ.xy;
+
+  i0.z += isYZ.z;
+  i0.w += 1.0 - isYZ.z;
+
+  // i0 now contains the unique values 0,1,2,3 in each channel
+  vec4 i3 = clamp( i0, 0.0, 1.0 );
+  vec4 i2 = clamp( i0-1.0, 0.0, 1.0 );
+  vec4 i1 = clamp( i0-2.0, 0.0, 1.0 );
+
+  //  x0 = x0 - 0.0 + 0.0 * C 
+  vec4 x1 = x0 - i1 + 1.0 * C.xxxx;
+  vec4 x2 = x0 - i2 + 2.0 * C.xxxx;
+  vec4 x3 = x0 - i3 + 3.0 * C.xxxx;
+  vec4 x4 = x0 - 1.0 + 4.0 * C.xxxx;
+
+// Permutations
+  i = mod(i, 289.0); 
+  float j0 = permute( permute( permute( permute(i.w) + i.z) + i.y) + i.x);
+  vec4 j1 = permute( permute( permute( permute (
+             i.w + vec4(i1.w, i2.w, i3.w, 1.0 ))
+           + i.z + vec4(i1.z, i2.z, i3.z, 1.0 ))
+           + i.y + vec4(i1.y, i2.y, i3.y, 1.0 ))
+           + i.x + vec4(i1.x, i2.x, i3.x, 1.0 ));
+// Gradients
+// ( 7*7*6 points uniformly over a cube, mapped onto a 4-octahedron.)
+// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
+
+  vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0) ;
+
+  vec4 p0 = grad4(j0,   ip);
+  vec4 p1 = grad4(j1.x, ip);
+  vec4 p2 = grad4(j1.y, ip);
+  vec4 p3 = grad4(j1.z, ip);
+  vec4 p4 = grad4(j1.w, ip);
+
+// Normalise gradients
+  vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+  p0 *= norm.x;
+  p1 *= norm.y;
+  p2 *= norm.z;
+  p3 *= norm.w;
+  p4 *= taylorInvSqrt(dot(p4,p4));
+
+// Mix contributions from the five corners
+  vec3 m0 = max(0.6 - vec3(dot(x0,x0), dot(x1,x1), dot(x2,x2)), 0.0);
+  vec2 m1 = max(0.6 - vec2(dot(x3,x3), dot(x4,x4)            ), 0.0);
+  m0 = m0 * m0;
+  m1 = m1 * m1;
+  return 49.0 * ( dot(m0*m0, vec3( dot( p0, x0 ), dot( p1, x1 ), dot( p2, x2 )))
+               + dot(m1*m1, vec2( dot( p3, x3 ), dot( p4, x4 ) ) ) ) ;
+
+}
+	
+#define NUM_OCTAVES 3
+	
+float fbm(vec4 x) {
+	float v = 0.0;
+	float a = 0.5;
+	vec4 shift = vec4(100.);
+	for (int i = 0; i < NUM_OCTAVES; ++i) {
+		v += a * snoise(x);
+		x = x * 2.0 + shift;
+		a *= 0.5;
+	}
+	return v;
+}
+
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
+uniform float uTime;
+uniform float uEdgeWidth;
+uniform float uFrequency;
+varying float vNoise;
+varying float vEdge;
+varying vec3 vNormal;
+varying vec3 vViewPosition;
+varying vec2 vUv;
+	
+void main() {
+  
+	vUv = uv;
+	vNoise = fbm(vec4(position*uFrequency, 0.));
+	vNoise = map(vNoise,-0.6,0.6,0.,1. - uEdgeWidth);
+	vec4 modelViewPosition = modelViewMatrix * vec4( position, 1.0 );
+	vViewPosition = -modelViewPosition.xyz;
+	gl_Position = projectionMatrix * modelViewPosition;
+	vNormal = normalMatrix * normal;
+  
+}
+</script>
+
+<!-- Flaky FS before main -->
+<script type="x-shader/x-fragment" id="flaky-fs-beforeMain">
+
+  uniform float uThreshold;
+  uniform float uEdgeWidth;
+  uniform vec3 uEdgeColor;
+  uniform vec3 uColor;
+  varying float vNoise;
+
+</script>
+
+<!-- Flaky FS main -->
+<script type="x-shader/x-fragment" id="flaky-fs">
+
+  float alpha = 1.0;
+	
+  if( vNoise > uThreshold) {
+		alpha = 0.0;
+	}
+	
+	vec3 materialColor = uColor / 255.0;
+	vec3 edgeColor = uEdgeColor / 255.0;
+	
+	vec3 color = materialColor;
+	
+	if( vNoise + uEdgeWidth > uThreshold ) {
+		color = edgeColor;
+	}
+	
+  vec4 diffuseColor = vec4( color, alpha );
+
+</script>
+
+<!-- Glow VS  -->
+<script type="x-shader/x-vertex" id="glow-vs">
+
+  varying vec3 vVertexWorldPosition;
+varying vec3 vVertexNormal;
+
+varying vec4 vFragColor;
+
+void main() {
+
+  vVertexNormal	= normalize(normalMatrix * normal);
+  vVertexWorldPosition	= (modelMatrix * vec4(position, 1.0)).xyz;
+
+  gl_Position	= projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+
+}
+  
+</script>
+
+<!-- Glow FS  -->
+<script type="x-shader/x-fragment" id="glow-fs">
+
+  uniform vec3	glowColor;
+uniform float	coeficient;
+uniform float	power;
+
+varying vec3	vVertexNormal;
+varying vec3	vVertexWorldPosition;
+
+varying vec4	vFragColor;
+
+void main() {
+
+  vec3 worldCameraToVertex = vVertexWorldPosition - cameraPosition;
+  vec3 viewCameraToVertex	= (viewMatrix * vec4(worldCameraToVertex, 0.0)).xyz;
+  viewCameraToVertex = normalize(viewCameraToVertex);
+  float intensity = pow(coeficient + dot(vVertexNormal, viewCameraToVertex), power);
+  gl_FragColor = vec4(glowColor, intensity);
+
+}
+</script>
+
+<!-- Radial gradient VS  -->
+<script type="x-shader/x-vertex" id="radialGradient-vs">
+
+  varying vec2 vUv;
+
+ void main() {
+ 
+  vUv = uv;
+  gl_Position = vec4(position, 1.0);
+
+ }
+  
+</script>
+
+<!-- Radial gradient FS  -->
+<script type="x-shader/x-fragment" id="radialGradient-fs">
+
+  varying vec2 vUv;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform float ratio;
+  
+void main() {
+  
+  vec2 uv = (vUv - 0.5) * vec2(ratio, 1.0);
+  gl_FragColor = vec4(mix(color1, color2, length(uv)), 1.0);
+
+}
+  
+</script>
+
+<script>
+    /*
+  UPDATED VERSION: NOVEMBER 2023, threejs v0.158.0
+  
+  It's disco time!  
+  And this ghost wants to party all night long 👻
+  But you can freeze him anytime you wish to!
+  
+  ★ Scene designed & coded by Anna Scavenger in May 2020 ★
+  https://twitter.com/ouchpixels
+  
+  License: You can remix, adapt, and build upon my code non-commercially.
+  
+  Assets credits, special thanks to:
+  Cubemap by Emil Persson aka Humus (@_Humus_)
+  Simplex noise by Stefan Gustavson (@stegu)
+  Tree gtlf model - by Helindu, modified by me in Blender:
+  https://sketchfab.com/3d-models/tree-without-leaves-1-336d3bc197ce4618ab325e7a6dfa0e7a
+  
+*/
+
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { Flow } from 'three/addons/modifiers/CurveModifier.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+
+// ASSETS
+
+let texChromeURL = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/911157/matcap_chromeEye_128.jpg";
+let texSteelURL = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/911157/matcap_steel_256.jpg";
+let ghostURL = "https://assets.codepen.io/911157/ghost1.glb";
+let treeURL = "https://assets.codepen.io/911157/tree_ghost_opt.glb";
+
+let scene, camera, renderer;
+
+// Through these points flies the ghost
+// Also points for placing the tori
+
+let controlPoints = [
+
+  new THREE.Vector3(420, 120, 0),	// letter D
+  new THREE.Vector3(-70, 200, 750), // additional point
+  new THREE.Vector3(-440, 100, 150), // letter G	
+  new THREE.Vector3(-250, 440, -395),	// letter O
+  new THREE.Vector3(-20, 600, -590), // additional point
+  new THREE.Vector3(200, 500, -380) // letter O2
+
+];
+
+let materials;
+let geometries;
+
+// FLOW + GLOW
+
+let ghost;
+let flow;
+
+let glowMeshes = [];
+let currentGlowMesh;
+
+// GLOBAL MESHES
+
+let discoBall, discoBallN, ballCover, ballCover2, discoBallG, discoBallT;
+let letterHLeft, letterHRight, cylinderT;
+let lettersNightGroup;
+let hookG, hookD, starD, starG;
+
+let pointLight, pointLight2;
+
+// 'FREEZING' THE SCENE EFFECT
+
+let quaternion = new THREE.Quaternion();
+let isSceneFrozen = false;
+let rotSpeed = 0.25;
+
+const btnFreeze = document.querySelector('#btn-freeze');
+const freezeTextBlur = document.querySelector('#freeze-text-blur');
+const freezeTextTop = document.querySelector('#freeze-text-top');
+
+// LANDSCAPE / PORTRAIT
+
+let isMobile = /(Android|iPhone|iOS|iPod|iPad)/i.test(navigator.userAgent);
+let windowRatio = window.innerWidth / window.innerHeight;
+let isLandscape = (windowRatio > 1) ? true : false;
+
+let mouseX = 0;
+let mouseY = 0;
+
+let params = {
+  
+  terrainWidth: 2000,
+  terrainLength: isLandscape ? 3000 : (2500 / windowRatio),
+  terrainPosY: -250,
+  treeMainPos: new THREE.Vector3(0, -250, 0),
+  treesBackgroundPos: new THREE.Vector3(0, -250, 0),
+  numTrees: 7,
+  terrainLettersPosZ: isLandscape ? 850 : 950,
+  ghostColor: new THREE.Color(0xffffff),
+  glowOffColor: new THREE.Color(0x8D8D8D),
+  glowOnColor: new THREE.Color(0xca00e5),
+  pointLightColor: new THREE.Color(0x0fc4b8), // dark green
+  play: false,
+  
+}
+
+init();
+
+function init() {
+  
+  geometries = initGeometries();
+  materials = initMaterials();
+  
+  // CAMERA, LIGHTS, RENDERER
+  
+  initBasicSetup();
+  
+  // MESHES
+  
+  initTerrain();
+  initTerrainLetters();
+  initAirLetters();
+  loadTree();
+  loadGhost();
+  
+  render();
+  
+  window.addEventListener("resize", onWindowResize, false);
+  document.addEventListener("mousemove", onMouseMove, false);
+  btnFreeze.addEventListener("click", freezeScene, false);
+  
+}
+
+function initBasicSetup() {
+  
+  initScene();
+  initCamera();
+  initLights();
+  initRenderer();
+
+}
+
+function initScene() {
+  
+  scene = new THREE.Scene();
+  const fogNear = isLandscape ? 1200 : 2200;
+  const fogFar = isLandscape ? 4000 : 5500;
+  scene.fog = new THREE.Fog(0x998a7d, fogNear, fogFar);
+  
+}
+
+function initCamera() {
+  
+  camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 5000);
+  const cameraY = isLandscape ? 170 : 400;
+  const cameraZ = isLandscape ? 1850 : (1800 / windowRatio);
+  camera.position.set(0, cameraY, cameraZ);
+  camera.lookAt(0, 0, 0);
+  scene.add(camera);
+  
+}
+
+function initLights() {
+  
+  const backLight = new THREE.DirectionalLight(0xff00ff, 1.75 * Math.PI);
+  backLight.position.set(200, 0, -55);
+  backLight.target.position.set(300, 50, -100);
+  
+  const fillLight = new THREE.DirectionalLight(0xffffff, 0.65 * Math.PI);
+  fillLight.position.set(80, 10, 200);
+  fillLight.target.position.set(50, 50, -50);
+  
+  let posZ = isLandscape ? 750 : 850;
+  
+  pointLight = new THREE.PointLight(params.pointLightColor, 8.5 * Math.PI, 200, 2);
+  pointLight.position.set(-300, 0, posZ);
+  pointLight2 = new THREE.PointLight(params.pointLightColor, 8.5 * Math.PI, 200, 2);
+  pointLight2.position.set(300, 0, posZ);
+
+  scene.add( fillLight, backLight, pointLight, pointLight2 );
+    
+}
+
+function initRenderer() {
+  
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio > 1.5 ? Math.min(window.devicePixelRatio, 1.4) : Math.min(window.devicePixelRatio, 1.25));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.gammaFactor = 2.2;
+  container.appendChild(renderer.domElement);
+  
+}
+
+function initGeometries() {
+  
+  let torus = new THREE.TorusGeometry(140, 40, 16, 46);
+  let halfTorus = new THREE.TorusGeometry(70, 25, 10, 20, Math.PI);
+  
+  let cylinderThin = new THREE.CylinderGeometry(10, 10, 190, 8);
+  let cylinderThick = new THREE.CylinderGeometry(30, 30, 150, 22, 1);
+  let cylinderThick2 = new THREE.CylinderGeometry(30, 30, 150, 22, 22);
+  
+  let sphere = new THREE.SphereGeometry(50, 24, 12);
+  let halfSphere = new THREE.SphereGeometry(50, 28, 8, 0, Math.PI);
+  let halfSphere2 = new THREE.SphereGeometry(55, 28, 8, 0, Math.PI);
+  let cone = new THREE.ConeGeometry(40, 110, 20); 
+  
+  // HOOK 1 - MERGED GEOMS
+  
+  let halfTorusThin = new THREE.TorusGeometry( 85, 10, 12, 50, Math.PI);
+  halfTorusThin.rotateX(Math.PI);
+  let radius = halfTorusThin.parameters.radius;
+  let cylinderHeight = cylinderThin.parameters.height;
+  halfTorusThin.translate(- radius, - cylinderHeight / 2, 0);
+  let hook = mergeGeometries([halfTorusThin, cylinderThin], true);
+  
+  // HOOK 2 - MERGED GEOMS
+  
+  let cylinderD = new THREE.CylinderGeometry(10, 10, 350, 10);
+  let halfTorusD = new THREE.TorusGeometry(70, 10, 12, 50, Math.PI / 2);
+  halfTorusD.rotateX(Math.PI);
+  halfTorusD.rotateZ( - Math.PI / 2);
+  let radiusD = halfTorusD.parameters.radius;
+  let heightCylinderD = cylinderD.parameters.height;
+  halfTorusD.translate( radiusD, - heightCylinderD / 2, 0 );
+  let hook2 = mergeGeometries([cylinderD, halfTorusD], true);
+  
+  return {
+    
+    torus,
+    halfTorus,
+    cylinderThin,
+    cylinderThick,
+    cylinderThick2,
+    sphere,
+    halfSphere,
+    halfSphere2,
+    cone,
+    hook,
+    hook2
+    
+  }
+  
+}
+
+function initMaterials() {
+  
+  const grey = new THREE.MeshBasicMaterial({color: 0x222222});
+  const blackBasic = new THREE.MeshBasicMaterial({color: 0x000000});
+  const brownSimple = isMobile ? (new THREE.MeshBasicMaterial({color: 0x594a3e})) : (new THREE.MeshLambertMaterial({color: 0x5e4732}));
+  const brown = new THREE.MeshLambertMaterial({color: 0x5e4732});
+  const purpleFlat = new THREE.MeshLambertMaterial({color: 0xff00ff});
+
+  const purple = new THREE.MeshStandardMaterial({
+    
+    color: 0xff00ff,
+    roughness: 0.4,
+    metalness: 0.9
+    
+  });
+  purple.color.convertSRGBToLinear();
+  
+  const greyFlat = new THREE.MeshPhongMaterial({
+    
+    color: 0x200066,
+    emissive: 0x54944,
+    specular: 0x1d683f,
+    shininess: 80,
+    flatShading: true
+    
+  });
+  greyFlat.color.convertSRGBToLinear();
+  
+  // MATCAPS
+
+  const textureLoader = new THREE.TextureLoader();
+  textureLoader.setCrossOrigin('');
+  const textureChrome = textureLoader.load(texChromeURL);
+  const textureSteel = textureLoader.load(texSteelURL);
+  
+  const matcapChrome = new THREE.ShaderMaterial({
+    
+    uniforms: {
+      tMatCap: { type: "t", value: textureChrome }
+    },
+    vertexShader: document.querySelector("#matcap-vs").textContent,
+    fragmentShader: document.querySelector("#matcap-fs").textContent,
+    side: THREE.DoubleSide
+    
+  });
+  
+  const matcapSteel = new THREE.ShaderMaterial({
+    
+    uniforms: {
+      tMatCap: { type: "t", value: textureSteel }
+    },
+    vertexShader: document.querySelector("#matcap-vs").textContent,
+    fragmentShader: document.querySelector("#matcap-fs").textContent,
+    side: THREE.DoubleSide
+    
+  });
+  
+  // DISCO REFLECTIONS
+  
+  const loader = new THREE.CubeTextureLoader();
+  loader.setCrossOrigin('');
+  loader.setPath('https://s3-us-west-2.amazonaws.com/s.cdpn.io/911157/');
+ 
+  const textureCube = loader.load([
+    
+    'pisa1_px.jpg', 'pisa1_nx.jpg',
+	  'pisa1_py.jpg', 'pisa1_ny.jpg',
+	  'pisa1_pz.jpg', 'pisa1_nz.jpg'
+    
+  ]);
+  
+  const disco = new THREE.MeshPhongMaterial({
+    
+    envMap: textureCube,
+    color: 0xff00ff,
+    emissive: 0xaa00aa,
+    specular: 0x1d683f,
+    flatShading: true
+    
+  });
+  
+  // FLAKY MATERIAL
+  
+  let phongShader = THREE.ShaderLib.standard;
+  let fragmentShader = phongShader.fragmentShader;
+  fragmentShader = document.querySelector("#flaky-fs-beforeMain").textContent +
+  fragmentShader.replace(
+    "vec4 diffuseColor = vec4( diffuse, opacity );",
+    document.querySelector("#flaky-fs").textContent
+  );
+
+  const flaky = new THREE.ShaderMaterial({
+    
+    uniforms: THREE.UniformsUtils.merge([phongShader.uniforms, {
+      
+      uThreshold: { value: 0.5 },
+      uEdgeWidth: { value: 0.0 },
+      uEdgeColor: { value: [255, 109, 203] },
+      uColor: { value: [255, 0, 255] },
+      uFrequency: { value: 0.95 }
+    
+    }]),
+    vertexShader: document.querySelector("#flaky-vs").textContent,
+    fragmentShader: fragmentShader,
+    side: THREE.DoubleSide,
+    lights: true,
+    transparent: true
+
+  });
+  
+  // GLOW MATERIAL
+  
+  let glowOffColor = params.glowOffColor;
+  
+  const glow	= new THREE.ShaderMaterial({
+		
+    uniforms: {
+   
+			coeficient: { type: "f", value: 1.1 },
+			power: { type: "f", value: 1.4 },
+			glowColor: { type: "c", value: glowOffColor },
+		
+    },
+		vertexShader: document.querySelector("#glow-vs").textContent,
+		fragmentShader: document.querySelector("#glow-fs").textContent,
+		transparent: true,
+	
+  });
+  
+  return {
+    
+    blackBasic,
+    grey, greyFlat,
+    purple, purpleFlat,
+    brown, brownSimple,
+    matcapChrome, matcapSteel,
+    disco,
+    flaky,
+    glow
+    
+  }
+  
+}
+
+function initTerrain() {
+  
+  let terrainWidth = params.terrainWidth;
+  let terrainLength = params.terrainLength;
+  let terrainY = params.terrainPosY;
+  
+  let terrainGeom = new THREE.PlaneGeometry(terrainWidth, terrainLength, 30, 30);
+  terrainGeom.rotateX(-0.5 * Math.PI);
+  let positionAttribute = terrainGeom.attributes.position;
+    
+  for (let i = 0; i < positionAttribute.count; i++) {
+    
+    let x = positionAttribute.getX( i );
+	  let y = positionAttribute.getY( i );
+	  let z = positionAttribute.getZ( i );
+    
+    y += Math.random() * 40;
+    
+    positionAttribute.setXYZ(i, x, y, z);
+  
+  }
+    
+  const terrain = new THREE.Mesh(terrainGeom, materials.brown);
+  terrain.position.y = terrainY;
+  scene.add(terrain);
+  
+  // SPRINKLE TERRAIN WITH POINTS
+  
+  const positionArray = terrainGeom.attributes.position.array;
+  const positionAttributeCount = terrainGeom.attributes.position.count;
+
+  const pointsGeom = new THREE.BufferGeometry();
+  pointsGeom.setAttribute('position', new THREE.Float32BufferAttribute(positionArray, 3));
+  const pointsMat = new THREE.PointsMaterial({ color: 0xff00ff, size: 6 });
+  const terrainPoints = new THREE.Points(pointsGeom, pointsMat);
+  terrainPoints.position.y = terrainY;
+  scene.add(terrainPoints);
+  
+  // SPRINKLE TERRAIN WITH LITTLE BOXES
+  
+  const boxBufferGeom = new THREE.BoxGeometry(2.85, 2.85, 2.85);
+  const instancedBoxGeom = new THREE.InstancedBufferGeometry().copy(boxBufferGeom);
+  let numInstances = positionAttributeCount;
+  const terrainBoxes = new THREE.InstancedMesh(instancedBoxGeom, materials.purpleFlat, numInstances);
+  
+  const dummy = new THREE.Object3D();
+
+  for (let i = 0; i < numInstances; i++) {
+
+    dummy.position.set(
+
+      noise.simplex3(i * 0.2, i * 0.5, 0.5) * 900,
+      Math.random() * (-220 - (-240)) + (-240),
+      Math.random() * (1300 - (-850)) + (-850),
+      
+    );
+
+    dummy.rotation.set(
+
+      Math.random() * (Math.PI * 1.95 - (- Math.PI * 1.95)) + (-Math.PI * 1.95),
+      Math.random() * (Math.PI * 1.95 - (- Math.PI * 1.95)) + (-Math.PI * 1.95),
+      0.0
+
+    );
+
+    dummy.updateMatrix();
+    terrainBoxes.setMatrixAt(i, dummy.matrix);
+
+  }
+
+  scene.add(terrainBoxes);
+  
+}
+
+function initTerrainLetters() {
+  
+  let posZ = params.terrainLettersPosZ;
+
+  // letter N
+  
+  const cylinderN = new THREE.Mesh(geometries.cylinderThick, materials.purple);
+  cylinderN.scale.y = 0.85;
+  cylinderN.position.set(-360, -150, posZ);
+  
+  const cylinderN2 = new THREE.Mesh(geometries.cylinderThick, materials.purple);
+  cylinderN2.position.set(-230, -170, posZ);
+  
+  const halfSphereN = new THREE.Mesh(geometries.halfSphere, materials.matcapSteel);
+  halfSphereN.position.set(-200.6, -97, posZ);
+  halfSphereN.scale.set(0.593, 0.593, 0.593);
+  halfSphereN.rotation.x =  - Math.PI / 2;
+  scene.add(halfSphereN);
+  
+  discoBallN = new THREE.Mesh(geometries.sphere, materials.disco);
+  discoBallN.position.set(-360, -50, posZ);
+  discoBallN.scale.set(0.5, 0.5, 0.5);
+  scene.add(discoBallN);
+  
+  const cylinderThinnerN = new THREE.Mesh(geometries.cylinderThin, materials.matcapSteel);
+  cylinderThinnerN.position.set(-360, -150, posZ);
+  cylinderThinnerN.scale.set(0.4, 0.9, 0.4);
+  scene.add(cylinderThinnerN);
+  
+  const cylinderThinN = new THREE.Mesh(geometries.cylinderThin, materials.matcapSteel);
+  cylinderThinN.position.set(-290, -170, posZ);
+  cylinderThinN.scale.set(1.2, 0.8, 1.2);
+  cylinderThinN.rotation.z = Math.PI / 4.5;
+  
+  const discN = new THREE.Mesh( geometries.cylinderThick, materials.matcapSteel );
+  discN.position.set(-360, -223, posZ);
+  discN.scale.set(1.28, 0.125, 1.28);
+  
+  const discN2 = discN.clone();
+  discN.position.set(-230, -240, posZ);
+  
+  const letterN = new THREE.Group();
+  letterN.add(cylinderN, cylinderN2, cylinderThinN, discN, discN2);
+  
+  scene.add(letterN);
+  
+  // letter I
+  
+  let letterIPosX = -110;
+  
+  discoBall = new THREE.Mesh(geometries.sphere, materials.disco);
+  discoBall.position.set(letterIPosX, -70, posZ);
+  
+  ballCover = new THREE.Mesh(geometries.halfSphere, materials.purple);
+  ballCover.material.side = THREE.DoubleSide;
+  
+  let halfRadius = ballCover.geometry.parameters.radius;
+  ballCover.scale.set(1.15, 1.15, 1.15);
+  ballCover.position.set(letterIPosX, - 74 - halfRadius, posZ);
+  ballCover.rotation.set(Math.PI / 2, - Math.PI / 2, 0);
+  ballCover.geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(- halfRadius, 0, 0));
+  ballCover.updateMatrix();
+  ballCover2 = ballCover.clone();
+  ballCover2.position.copy(ballCover.position);
+  ballCover2.rotation.z = Math.PI;
+  ballCover2.rotation.y = Math.PI / 2;
+  
+  const cone = new THREE.Mesh(geometries.cone, materials.matcapSteel);
+  cone.position.set(letterIPosX, -180, posZ);
+  
+  const letterI = new THREE.Group();
+  letterI.add(cone, discoBall, ballCover, ballCover2);
+  scene.add(letterI);
+  
+  // letter G
+  
+  const torusG = new THREE.Mesh(geometries.halfTorus, materials.purple);
+  torusG.position.set(50, -160, posZ);
+  torusG.rotation.z = Math.PI / 2;
+  
+  const hookG = new THREE.Mesh(geometries.hook, materials.matcapSteel);
+  hookG.scale.set(0.3, 0.25, 0.8);
+  hookG.position.set(70, -185, posZ);
+  
+  discoBallG = discoBallN.clone();
+  discoBallG.position.set(50, -160, posZ);
+  
+  const letterG = new THREE.Group();
+  letterG.add(torusG, hookG, discoBallG);
+  scene.add(letterG);
+  
+  // letter H
+  
+  letterHLeft = new THREE.Group();
+  letterHRight = new THREE.Group();
+  
+  const cylinderH = new THREE.Mesh(geometries.cylinderThick2, materials.flaky);
+  // cylinderH.position.set(140, -145, 850);
+  cylinderH.position.set(140, -160, posZ);
+  cylinderH.scale.set(1.0, 0.9, 1.0);
+  
+  const cylinderH2 = new THREE.Mesh(geometries.cylinderThick, materials.matcapSteel);
+  cylinderH2.scale.set(0.98, 0.88, 0.98);
+  cylinderH2.position.copy(cylinderH.position);
+ 
+  const discH = new THREE.Mesh(geometries.cylinderThick, materials.matcapSteel);
+  discH.position.set(140, -87, posZ);
+  discH.scale.set(1.275, 0.08, 1.275);
+  const discH2 = discN.clone();
+  discH2.position.set(140, -225, posZ);
+  
+  letterHLeft.add(cylinderH, cylinderH2, discH, discH2);
+  
+  letterHRight = letterHLeft.clone();
+  letterHRight.position.set(120, 0, 0);
+  
+  const horizontalH = new THREE.Mesh(geometries.cylinderThin, materials.matcapSteel);
+  horizontalH.scale.set(1.2, 0.5, 1.2);
+  horizontalH.rotation.z = Math.PI / 2;
+  horizontalH.position.set(200, -155, posZ);
+  
+  const letterH = new THREE.Group();
+  letterH.add(letterHLeft, letterHRight, horizontalH);
+  
+  scene.add(letterH);
+
+  // letter T 
+  
+  cylinderT = new THREE.Mesh(geometries.cylinderThin, materials.matcapSteel);
+  cylinderT.scale.set(0.55, 0.725, 0.55);
+  cylinderT.position.set(370, -40, posZ);
+  cylinderT.rotation.z = Math.PI / 2;
+  
+  const cylinderT2 = cylinderN.clone();
+  cylinderT2.position.set(370, -170, posZ);
+  cylinderT2.scale.set(0.9, 0.75, 0.9);
+  
+  discoBallT = discoBallN.clone();
+  discoBallT.position.set(370, -70, posZ);  
+  
+  const letterT = new THREE.Group();
+  letterT.add(cylinderT, cylinderT2, discoBallT);
+  scene.add(letterT);
+  
+  lettersNightGroup = new THREE.Group();
+  
+}
+
+function loadTree() {
+  
+  const loader = new GLTFLoader();
+
+  loader.load(treeURL,
+    
+    function (gltf) {
+      
+      let tree = gltf.scene.children[0].children[0].children[0].children[0].children[0];
+      tree.geometry.computeVertexNormals();
+      let treeGeom = tree.geometry;
+      treeGeom.scale(55, 55, 55);
+      treeGeom.rotateX(-0.5 * Math.PI);
+      tree.position.set(50, -150, -1050);
+      tree.material = new THREE.MeshBasicMaterial({color: 0x000000, fog: false});
+    
+      initTrees(treeGeom);
+      scene.add(tree);
+      
+    },
+    
+    function (xhr) { console.log((xhr.loaded / xhr.total * 100 ) + '% loaded'); },
+    
+    function (error) { console.log( 'An error happened' ); }
+    
+  );
+  
+}
+
+function initTrees(tGeom) {
+  
+  let treeMesh = new THREE.Mesh(tGeom, materials.matcapSteel); 
+      
+  let treesCoords = [
+    
+    -350, -200, -1400,
+    -200, -270, -1300,
+    250, -250, -1300
+    
+  ];
+  
+  for (let i = 0; i < (treesCoords.length / 3); i++) {
+    
+    let t = treeMesh.clone();
+    let x = treesCoords[3 * i];
+    let y = treesCoords[3 * i + 1];
+    let z = treesCoords[3 * i + 2];
+    t.position.set(x, y, z);
+    t.rotation.set(0, i * 0.2 * Math.PI, 0);
+    scene.add(t);
+    
+  }
+  
+}
+
+function loadGhost() {
+    
+  const loader = new GLTFLoader();
+
+  loader.load(ghostURL,
+    
+    function (gltf) {
+      
+      ghost = gltf.scene.children[2].parent.children[2];
+      ghost.geometry.computeVertexNormals();
+      initFlow();
+      removeLoadingScreen();
+      
+    },
+    
+    function (xhr) { console.log((xhr.loaded / xhr.total * 100 ) + '% loaded'); },
+    
+    function (error) { console.log( 'An error happened' ); }
+    
+  );
+  
+}
+
+function initFlow() {
+  
+  let ghostColor = params.ghostColor || 0xff3da4;
+  
+  let purple = new THREE.MeshStandardMaterial({
+
+    color: ghostColor,
+    roughness: 0.95,
+    metalness: 0.05,
+    side: THREE.DoubleSide
+  
+  });
+  purple.color.convertSRGBToLinear();
+  
+  let curvePoints = controlPoints;
+  
+  let curve = new THREE.CatmullRomCurve3(curvePoints);
+  curve.curveType = "centripetal";
+  curve.closed = true;
+  
+  let ghostScale = 0.375;
+  const mesh = ghost;
+  mesh.geometry.scale(ghostScale, ghostScale, ghostScale);
+  mesh.geometry.rotateY(-Math.PI / 2);
+  mesh.geometry.rotateX(Math.PI / 2);
+
+  let objectToCurve = new THREE.Mesh(mesh.geometry, purple);
+  flow = new Flow(objectToCurve);
+  flow.updateCurve(0, curve);
+  scene.add(flow.object3D);
+  
+}
+
+// "GOOD" LETTERS IN THE AIR
+
+function initAirLetters() {
+  
+  // 4 TORI - AIR LETTERS
+  
+  let letterPositions = [controlPoints[0], controlPoints[2], controlPoints[3], controlPoints[5]];
+    
+  let torus = new THREE.Mesh(geometries.torus, materials.glow);
+    
+  for (let i = 0; i < letterPositions.length; i++) {
+    
+    let t = torus.clone();
+    // IMPORTANT! When cloning a ShaderMaterial, the attributes and vertex/fragment programs are copied by reference. 
+    // The uniforms are copied by value, which is what we need. / turning on and off glow for each mesh /
+    t.material = torus.material.clone();
+    t.material.isGlowing = false;
+    t.position.copy(letterPositions[i]);
+    glowMeshes.push(t);
+    scene.add(t);
+  
+  }
+    
+  // letter G
+    
+  hookG = new THREE.Mesh(geometries.hook, materials.matcapChrome);
+  hookG.position.set(-310, -40, 150);
+  hookG.matrixAutoUpdate = false;
+  hookG.updateMatrix();
+  scene.add( hookG );
+  
+  let starGeom = generateStarGeometry();
+  starG = new THREE.Mesh(starGeom, materials.matcapSteel);
+  starG.position.set(-480, -124, 150);
+  starG.rotation.z = Math.PI / 5;
+  starG.scale.set(2.4, 2.4, 2.4);
+  scene.add(starG);
+  
+  // letter D
+  
+  hookD = new THREE.Mesh(geometries.hook2, materials.matcapChrome);
+  hookD.position.set(550, 210, 0);
+  hookD.matrixAutoUpdate = false;
+  hookD.updateMatrix();
+  scene.add(hookD);
+  
+  starD = starG.clone();
+  starD.position.set(550, 398, 0);
+  starD.rotation.z = Math.PI / 5;
+  scene.add(starD);
+  
+}
+
+function generateStarGeometry() {
+  
+  let numPoints = 7;
+  let minLength = 4;
+  let maxLength = 15;
+  
+  let extrudeSettings = {
+    
+    steps: 2,
+    depth: 2.5,
+    bevelEnabled: true,
+    bevelThickness: 0,
+    bevelSize: 2,
+    bevelOffset: 0,
+    bevelSegments: 1
+    
+  };
+  
+  let points = []; 
+  
+	for (let i = 0; i < numPoints * 2; i++) {
+
+		let l = i % 2 == 1 ? minLength : maxLength;
+		let step = i / numPoints * Math.PI;
+		points.push(new THREE.Vector2(Math.cos(step) * l, Math.sin(step) * l));
+
+	}
+
+	let starShape = new THREE.Shape(points);
+	let starGeom = new THREE.ExtrudeGeometry(starShape, extrudeSettings);
+  
+  return starGeom;
+  
+}
+
+function render() {
+  
+  renderer.render(scene, camera);
+  requestAnimationFrame(render);
+  
+  if (flow && isSceneFrozen) {
+    
+    // STOP THE FLYING GHOST AND ROTATE THE SCENE
+    flow.moveAlongCurve(0.000);
+    rotateScene();
+    
+  } else if (flow && !isSceneFrozen ) {
+
+    animateTerrainLetters();
+    updatePointLights();
+    
+    flow.moveAlongCurve(0.005);
+    
+    let offset = flow.uniforms.pathOffset.value.toFixed(3);
+    let progress = (offset - Math.floor(offset)).toFixed(3);
+        
+    if (progress == 0.25) {
+      
+      currentGlowMesh = glowMeshes[1];
+      updateMaterial(currentGlowMesh);
+
+    } else if (progress == 0.55) {
+      
+      currentGlowMesh = glowMeshes[2];
+      updateMaterial(currentGlowMesh);
+      
+    } else if (progress == 0.7) {
+      
+      currentGlowMesh = glowMeshes[3];
+      updateMaterial(currentGlowMesh);
+
+    } else if (progress == 0.92) {
+      
+      currentGlowMesh = glowMeshes[0];
+      updateMaterial(currentGlowMesh);
+
+    } else {
+      
+      return;
+    
+    }
+
+  }
+  
+}
+
+function rotateScene() {
+  
+  camera.lookAt(scene.position);
+  let angle = 0.001 * mouseX;
+  camera.position.applyQuaternion(quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0), angle));
+
+}
+
+function updateMaterial(mesh) {
+  
+  let glowColor = mesh.material.uniforms.glowColor.value;
+  let coeff = mesh.material.uniforms.coeficient;
+  
+  mesh.material.isGlowing = !mesh.material.isGlowing;
+    
+  mesh.material.isGlowing ? glowColor.set(params.glowOnColor) : glowColor.set(params.glowOffColor);
+  mesh.material.isGlowing ? coeff.value = 1.4 : coeff.value = 1.0;
+  
+  if (currentGlowMesh == glowMeshes[1]) {
+    
+    mesh.material.isGlowing ? (hookG.material = materials.purple) : (hookG.material = materials.matcapChrome);
+    
+  }  else if (currentGlowMesh == glowMeshes[0]) {
+    
+    mesh.material.isGlowing ? (hookD.material = materials.purple) : (hookD.material = materials.matcapChrome);
+    
+  }
+  
+}
+
+function updatePointLights() {
+  
+  pointLight.intensity = 3.25 + Math.abs(mouseX) * 4.75;
+  pointLight2.intensity = 3.25 + Math.abs(mouseX) * 4.75;
+
+}
+
+function animateTerrainLetters() {
+  
+  starG.rotation.y = mouseX * Math.PI;
+  starD.rotation.y = - mouseX * Math.PI;
+  
+  // letter N
+  discoBallN.rotation.y =  - (mouseX * mouseX) * Math.PI * 0.5;
+  
+  // letter I
+  discoBall.rotation.y = mouseX * Math.PI * 0.25;
+  discoBall.material.emissive.r = 0.8 - Math.abs(mouseX * 0.78);
+  ballCover.rotation.y = - Math.PI / 2 + Math.PI / 1.85 * Math.abs(mouseX * mouseX);
+  ballCover.scale.set(1.15 - 0.6 * Math.abs(mouseX*mouseX), 1.15 - 0.85 * Math.abs(mouseX * mouseX), 1.15 - 0.75 * Math.abs(mouseX * mouseX));
+  ballCover2.rotation.y = Math.PI / 2 - Math.PI / 1.85 * Math.abs(mouseX * mouseX);
+  ballCover2.scale.set(1.15 - 0.6 * Math.abs(mouseX*mouseX), 1.15 - 0.85 * Math.abs(mouseX*mouseX), 1.15 - 0.75 * Math.abs(mouseX*mouseX));
+  
+  // letter G
+  discoBallG.rotation.y = -mouseX * Math.PI;
+  discoBallG.scale.set(0.5, 0.2 + 0.3 * Math.abs(mouseX), 0.5);
+  
+  // letter H
+  letterHLeft.children[0].rotation.y = (mouseX) * Math.PI;
+  letterHRight.children[0].rotation.y = - (mouseX) * Math.PI;
+
+  // letter T
+  discoBallT.rotation.y = -mouseX * Math.PI * 0.5;
+  cylinderT.rotation.y = -mouseX * Math.PI * 0.25;
+  
+}
+
+// *** EVENTS ***
+
+function onWindowResize() {
+  
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  
+}
+
+function onMouseMove(e) {
+  
+  e.preventDefault();
+  mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+  mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+  
+}
+
+function freezeScene() {
+  
+  params.play = false;
+    
+  if (!isSceneFrozen) {
+    
+    params.play = false;
+    isSceneFrozen = !isSceneFrozen;
+    
+    freezeTextTop.style.stroke = "#63639f";
+    freezeTextBlur.style.stroke = "#5959ff";
+    
+  } else {
+    
+    params.play = true;
+    isSceneFrozen = !isSceneFrozen;
+    
+    freezeTextBlur.style.stroke = "#b0b0b0";
+    freezeTextTop.style.stroke = "#b0b0b0";
+
+  }
+  
+}
+
+function removeLoadingScreen() {
+
+  const loaderDiv = document.querySelector("#loader");
+  const sceneDiv = document.querySelector("#container");
+  loaderDiv.style.animation = "fadeOut 0.375s ease-in-out forwards";
+  sceneDiv.style.animation = "fadeIn 0.75s ease-in-out forwards";
+  loaderDiv.style.display = "none";
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    removeLoadingScreen()
+});
+</script>
+</body>
+</html>
